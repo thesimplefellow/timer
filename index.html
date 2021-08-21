@@ -1,0 +1,218 @@
+<html>
+    <head>
+      <meta charset="UTF-8">
+         <title> Timer App || Jeshwanth Web Developer </title>
+            <style>
+
+                    * {
+                      box-sizing: border-box;
+                      margin: 0;
+                      padding: 0;
+                      font-family: "Nunito", sans-serif;
+                    }
+                    #register-form
+                     {
+                      width: 100%;
+                      min-height: 100vh;
+                      padding: 0 20px;
+                      background-image: url("1.jpg");
+                      display: flex;                   
+                     
+                      background-size: cover;
+                     }
+
+                     #register-form .container
+                      {
+                        padding: 60px;
+                        margin: auto;
+                        width: 100%;
+                        max-width: 350px;
+                        min-height: 350px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        background: radial-gradient(
+                          ellipse at left bottom,
+                          rgba(22, 24, 47, 1) 0%,
+                          rgba(38, 20, 72, 0.9) 59%,
+                          rgba(17, 27, 75, 0.9) 100%
+                        );
+                        box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+                       
+                      }
+
+                     #register-form .container .input-label 
+                     {
+                        color: rgb(255, 255, 255);
+                        margin: 14px 0;
+                        display: block;
+                        font-size: 22px;
+                        line-height: 1;
+                        
+                      }
+
+                      #register-form .container .input-type{
+                        width: 100%;
+                        border: none;
+                        outline: none;
+                        font-size: 19px;
+                        padding: 10px;
+                        background: rgba(255, 255, 255, 0.1);
+                        color: #fff;
+                        letter-spacing: 1px;
+                      }
+                      .input
+                      {
+                        margin-top:5px; 
+                        font-size:13px;
+                        color: #91a007;
+                      }
+                    
+                      .button 
+                      {
+                      background-color: #000000; /* Green */
+                      width: 230px;
+                      border: none;
+                      color: white;
+                      padding: 15px 32px;
+                      text-align: center;
+                      text-decoration: none;
+                      display: inline-block;
+                      font-size: 16px;
+                      padding:10px;
+                      margin-top:12px;
+                      cursor: pointer;
+                      }
+                      .button:hover
+                      {
+                      background-color: #00929d; /* Green */
+                     
+                      }
+
+                      .heading
+                      {
+                        font-size:38;
+                      }
+                      .hidden
+                      {
+                      display: none;
+                      }
+                      #overlay
+                      {
+                      position: fixed;
+                      display: none;
+                      width: 100%;
+                      height: 100%;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      background-color: rgba(0,0,0,0.5);
+                      z-index: 2;
+                      cursor: pointer;
+                      }
+                      #image
+                      {
+                      padding-top:325;
+                      }
+                      .sub
+                      {
+                      font-size:22;
+                      }
+                      ::placeholder
+                      {
+                        font-size: small;
+                      }
+                      
+                    
+                      
+   
+            </style>
+    </head>
+      <body style ="background-color: lightblue">
+        <form method="post" autocomplete="off" name="google-sheet" id = "register-form">
+        <div class="container">
+
+        
+
+        <div class = "input-label">
+         <center><input class="input-type" type="text"name="Name"placeholder="Your's  name *" value=""  maxlength="13" required=""/><center>
+        </div>
+
+        <div class = "input-label" >
+          <center><input class = "input-type" list = "list" placeholder="Why using computer ?*"name = "Using"required=""/></center>
+          <datalist id="list">
+            <option value ="Seeing class">
+            <option value ="Youtube">
+            <option value ="Free fire">
+              <option value ="Movie Downloading">
+                <option value ="Websites loading">
+                
+          </datalist>
+         </div>
+
+         <div class = "input-label">
+          <input class="input-type" type="time" placeholder="Staring Time*"  name="Starting Time" required=""/>
+          <p class="input"> Please Select Starting Time</p>
+         </div>
+
+         <div class = "input-label">
+          <input class="input-type" type="time" placeholder="Staring Time*" name="Ending Time" required=""/>
+          <p class="input"> Please Select Ending Time</p>
+         </div>
+
+         <div class="hidden">
+          <input type="date" name="Date" id="date">
+         </div>
+
+
+
+
+         <div class="#">
+          <center> <input type="submit" class="button" value="Submit" name="submit" style="display: block;" id="then">
+          <input type="button" class="button" value="Please Wait" style="display: none; background-color: #ff0000;"id="now">
+          <input type="button" class="button" value="Submitted" style="display: none; background-color: #007cbf;"  id="after"> </center>
+        </div>
+
+        <script>
+          const scriptURL = 'https://script.google.com/macros/s/AKfycbxh9z2EkCC-cFbKv7tWAqaHCzjsKQ-Nu-BUGDZx8NWW4dNr_Zellav3V8pxM0-qzMxG/exec'
+          const form = document.forms['google-sheet']
+
+          document.addEventListener('submit',e =>{
+          e.preventDefault()
+          document.getElementById("then").style.display = "none"
+          document.getElementById("now").style.display = "block"
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => alert('Thank You '))
+          .then(response => document.getElementById("now").style.display = "none")
+          .then(response => document.getElementById("after").style.display = "block")
+          .catch(error => console.error('Error!', error.message))
+      })
+        </script>
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+
+          var field = document.querySelector('#date');
+          var date = new Date();
+
+          field.value = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0);
+
+          var field = document.querySelector('#time');
+          var date = new Date();
+
+          field.value = date.getHours().toString() + ':' + (date.getMinutes() + 1).toString().padStart(2, 0) + ':' + date.getSeconds().toString().padStart(2, 0)
+      </script>
+
+      
+
+
+       
+      </form>
+    </body>
+</html>
